@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+
+<mapper namespace="com.client.entity.TbAuthority">
+  	
+	<resultMap type="com.client.entity.TbAuthority" id="result">
+        <result property="id" column="id"/>
+        <result property="pid" column="pid"/>
+        <result property="tcAppId" column="tc_app_id"/>
+        <result property="tcCode" column="tc_code"/>
+        <result property="tcName" column="tc_name"/>
+        <result property="tcType" column="tc_type"/>
+        <result property="tcUrl" column="tc_url"/>
+        <result property="tcOrder" column="tc_order"/>
+	</resultMap>
+  	
+	<resultMap type="com.client.entity.TbAuthority" id="authorityRoleResult" extends="result">
+        <collection property="tcRoles" ofType="com.client.entity.TbRole">
+	        <id property="id" column="role_id"/>
+	        <result property="tcCode" column="role_code"/>
+	        <result property="tcName" column="role_name"/>
+        </collection>
+	</resultMap>
+  	
+	<sql id="columns">
+		t.id, t.pid, t.tc_app_id, t.tc_code, t.tc_name, t.tc_type, t.tc_url, t.tc_order 
+	</sql>
+	
+	<sql id="roleColumns">
+		t3.id as role_id, t3.tc_code as role_code, t3.tc_name as role_name
+	</sql>
+	
+	<select id="queryWithRoleByAppid" resultMap="authorityRoleResult">
+		select <include refid="columns"/>, <include refid="roleColumns"/>
+		  from tb_authority t
+		 inner join tb_role_authority t2 on t.id=t2.tc_authority_id and t.tc_app_id=#{appid}
+		 inner join tb_role t3 on t2.tc_role_id=t3.id
+		 order by 1
+	</select>
+	
+</mapper>  
