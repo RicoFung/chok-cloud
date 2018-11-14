@@ -3,6 +3,9 @@
 
 <mapper namespace="com.client.entity.TbUser">
   	
+	<!-- 开启基于redis的二级缓存 -->
+    <cache type="chok.util.mybatis.RedisCache"/>
+    
 	<resultMap type="com.client.entity.TbUser" id="result">
         <result property="id" column="id"/>
         <result property="tcCode" column="tc_code"/>
