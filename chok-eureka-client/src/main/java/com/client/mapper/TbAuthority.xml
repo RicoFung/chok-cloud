@@ -33,10 +33,11 @@
 		t3.id as role_id, t3.tc_code as role_code, t3.tc_name as role_name
 	</sql>
 	
-	<select id="queryWithRoleByAppid" resultMap="authorityRoleResult">
+	<select id="query" resultMap="authorityRoleResult">
 		select <include refid="columns"/>, <include refid="roleColumns"/>
 		  from tb_authority t
-		 inner join tb_role_authority t2 on t.id=t2.tc_authority_id and t.tc_app_id=#{appid}
+		 inner join tb_app t1 on t.tc_app_id = t1.id and t1.tc_code=#{appcode}
+		 inner join tb_role_authority t2 on t.id=t2.tc_authority_id
 		 inner join tb_role t3 on t2.tc_role_id=t3.id
 		 order by 1
 	</select>

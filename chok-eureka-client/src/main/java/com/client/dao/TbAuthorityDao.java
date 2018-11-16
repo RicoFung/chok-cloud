@@ -28,10 +28,4 @@ public class TbAuthorityDao extends BaseDao<TbAuthority,Long>
 	{
 		return TbAuthority.class;
 	}
-	
-	@SuppressWarnings("unchecked")
-	public List<TbAuthority> queryWithRoleByAppid(String appid)
-	{
-		return (List<TbAuthority>) query("queryWithRoleByAppid", appid);
-	}
 }

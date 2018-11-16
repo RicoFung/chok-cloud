@@ -1,15 +1,16 @@
 package com.client.dao;
 
 import javax.annotation.Resource;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.client.entity.TbUser;
+import com.client.entity.TbMenu;
 
 import chok.devwork.springboot.BaseDao;
 
 @Repository
-public class TbUserDao extends BaseDao<TbUser,Long>
+public class TbMenuDao extends BaseDao<TbMenu,Long>
 {
 	@Resource//(name = "firstSqlSessionTemplate")
 	private SqlSession sqlSession;
@@ -21,13 +22,8 @@ public class TbUserDao extends BaseDao<TbUser,Long>
 	}
 	
 	@Override
-	public Class<TbUser> getEntityClass()
+	public Class<TbMenu> getEntityClass()
 	{
-		return TbUser.class;
-	}
-	
-	public TbUser getByUsername(String username)
-	{
-		return (TbUser) get("getByUsername", username);
+		return TbMenu.class;
 	}
 }

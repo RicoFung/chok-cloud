@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+
+<mapper namespace="com.client.entity.TbMenu">
+  	
+	<resultMap type="com.client.entity.TbMenu" id="result">
+        <result property="id" column="id"/>
+        <result property="pid" column="pid"/>
+        <result property="tcAuthorityId" column="tc_authority_id"/>
+        <result property="tcAppId" column="tc_app_id"/>
+        <result property="tcCode" column="tc_code"/>
+        <result property="tcName" column="tc_name"/>
+        <result property="tcOrder" column="tc_order"/>
+        <result property="tcLevel" column="tc_level"/>
+        <result property="tcUrl" column="tc_url"/>
+	</resultMap>
+  	
+	<sql id="columns">
+		t.id, t.pid, t.tc_authority_id, t.tc_app_id, t.tc_code, t.tc_name, t.tc_order, t.tc_level, t1.tc_url 
+	</sql>
+	
+	<sql id="dynamicWhere">
+		<where>
+			<if test="@chok.devwork.Ognl@isNotEmpty(id)"> and t.id = #{id}</if>
+			<if test="@chok.devwork.Ognl@isNotEmpty(pid)"> and t.pid = #{pid}</if>
+			<if test="@chok.devwork.Ognl@isNotEmpty(appid)"> and t.tc_app_id = #{appid}</if>
+			<if test="@chok.devwork.Ognl@isNotEmpty(appcode)"> and t0.tc_code = #{appcode}</if>
+			<if test="@chok.devwork.Ognl@isNotEmpty(menucode)"> and t.tc_code like concat('%',#{menucode},'%') </if>
+			<if test="@chok.devwork.Ognl@isNotEmpty(menuname)"> and t.tc_name like concat('%',#{menuname},'%') </if>
+			<if test="@chok.devwork.Ognl@isNotEmpty(userid)"> and t4.id=#{userid} </if>
+			<if test="@chok.devwork.Ognl@isNotEmpty(usercode)"> and t4.tc_code=#{usercode} </if>
+		</where>
+	</sql>	
+	
+	<select id="query" resultType="list" resultMap="result">
+		select <include refid="columns"/> from tb_menu t
+		 inner join tb_app t0 on t.tc_app_id = t0.id
+	     inner join tb_authority t1 on t.tc_authority_id = t1.id
+		 inner join tb_role_authority t2 on t.tc_authority_id = t2.tc_authority_id
+		 inner join tb_user_role t3 on t2.tc_role_id = t3.tc_role_id
+		 inner join tb_user t4 on t3.tc_user_id = t4.id
+		 <include refid="dynamicWhere" />
+		 group by t.id
+		 order by t.tc_order
+	</select>
+	
+</mapper>  
