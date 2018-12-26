@@ -39,5 +39,6 @@
 		<dependency><groupId>mysql</groupId><artifactId>mysql-connector-java</artifactId></dependency>
 		<!-- chok-devwork -->
 		<dependency><groupId>com.chok</groupId><artifactId>chok-devwork</artifactId></dependency>
+		<dependency><groupId>com.chok</groupId><artifactId>chok-redis</artifactId></dependency>
 	</dependencies>
 </project>

@@ -4,7 +4,7 @@
 <mapper namespace="com.client.entity.TbAuthority">
   	
 	<!-- 开启基于redis的二级缓存 -->
-    <cache type="chok.util.mybatis.RedisCache"/>
+    <cache type="chok.redis.mybatis.RedisCache"/>
     
 	<resultMap type="com.client.entity.TbAuthority" id="result">
         <result property="id" column="id"/>
