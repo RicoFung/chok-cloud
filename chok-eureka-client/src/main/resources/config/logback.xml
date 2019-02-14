@@ -115,7 +115,7 @@
 
 	<!-- logger -->
     <logger name="org.springframework" level="ERROR" />
-    <logger name="com.eureka.client" level="DEBUG" />
+    <logger name="com.client" level="DEBUG" />
 
     <!-- ${LOG_ROOT_LEVEL} 日志级别 -->
     <root level="${LOG_ROOT_LEVEL}">
