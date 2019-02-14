@@ -35,6 +35,8 @@
 		<dependency><groupId>org.springframework.cloud</groupId><artifactId>spring-cloud-starter-netflix-eureka-client</artifactId></dependency>
 		<!-- spring-boot druid -->
 		<dependency><groupId>com.alibaba</groupId><artifactId>druid-spring-boot-starter</artifactId></dependency>
+		<!-- spring-boot-starter-security -->
+		<dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-security</artifactId></dependency>
 		<!-- db driver myql-->
 		<dependency><groupId>mysql</groupId><artifactId>mysql-connector-java</artifactId></dependency>
 		<!-- chok-devwork -->
